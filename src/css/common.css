@@ -33,3 +33,13 @@ img {
   justify-content: center;
   align-items: center;
 }
+
+/* timer */
+.timer {
+  display: flex;
+}
+
+.field {
+  padding: 30px;
+  font: 2em sans-serif;
+}

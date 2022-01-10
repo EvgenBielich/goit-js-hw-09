@@ -6,19 +6,16 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const refs = {
   input: document.querySelector('#datetime-picker'),
   startBtn: document.querySelector('[data-start]'),
-  //stopBtn: document.querySelector('[data-stop]'),
   daysCont: document.querySelector('[data-days]'),
   hoursCont: document.querySelector('[data-hours]'),
   minutesCont: document.querySelector('[data-minutes]'),
   secondsCont: document.querySelector('[data-seconds]'),
 };
-const { input, startBtn, /*stopBtn*/ daysCont, hoursCont, minutesCont, secondsCont } = refs;
+const { input, startBtn, daysCont, hoursCont, minutesCont, secondsCont } = refs;
 
 startBtn.disabled = true;
-//stopBtn.disabled = true;
 
 startBtn.addEventListener('click', onStartClick);
-//stopBtn.addEventListener('click', onStopBtnClick);
 
 let intervalId = null;
 
@@ -51,13 +48,7 @@ function onStartClick() {
     }
   }, 1000);
   startBtn.disabled = true;
-  //stopBtn.disabled = false;
   input.disabled = true;
-}
-
-function onStopBtnClick() {
-  Notify.warning('Timer stoped', { timeout: 5000 });
-  finishTimer();
 }
 
 function convertMs(ms) {
@@ -65,12 +56,10 @@ function convertMs(ms) {
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
-
   const days = Math.floor(ms / day);
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
   return { days, hours, minutes, seconds };
 }
 
@@ -87,7 +76,6 @@ function addLeadingZero(value) {
 
 function finishTimer() {
   clearInterval(intervalId);
-  stopBtn.disabled = true;
   input.disabled = false;
   daysCont.textContent = '00';
   hoursCont.textContent = '00';
